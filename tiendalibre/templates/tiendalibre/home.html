@@ -1,16 +1,21 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Tienda Libre</title>
-</head>
-<body>
+{% extends "tiendalibre/base.html" %}
 
+{% block title %}
+Tienda Libre
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
     <h1>Bienvenido a Tienda Libre</h1>
 
-    <p>Esta es la página principal de nuestra tienda.</p>
+    <p class="lead">
+        Esta es la página principal de nuestra tienda.
+    </p>
 
-    <a href="/acerca-de-mi/">Acerca de mí</a>
+    <a href="/acerca-de-mi/" class="btn btn-primary">
+        Acerca de mí
+    </a>
+</div>
 
-</body>
-</html>
+{% endblock %}

@@ -1,18 +1,26 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Acerca de mí</title>
-</head>
-<body>
+{% extends "tiendalibre/base.html" %}
 
+{% block title %}
+Acerca de mí
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
     <h1>Acerca de mí</h1>
 
-    <p>Hola, soy Facundo Medina Lucini, un desarrollador en formación.</p>
+    <p>
+        Hola, soy Facundo Medina Lucini, un desarrollador en formación.
+    </p>
 
-    <p>Estuve aprendiendo sobre Python, SQL, Django, HTML, CSS y más para poder desarrollar aplicaciones web.</p>
+    <p>
+        Estuve aprendiendo sobre Python, SQL, Django, HTML, CSS y más
+        para poder desarrollar aplicaciones web.
+    </p>
 
-    <a href="/">Volver al inicio</a>
+    <a href="/" class="btn btn-secondary">
+        Volver al inicio
+    </a>
+</div>
 
-</body>
-</html>
+{% endblock %}
