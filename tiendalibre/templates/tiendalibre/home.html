@@ -6,16 +6,53 @@ Tienda Libre
 
 {% block content %}
 
-<div class="container mt-5">
-    <h1>Bienvenido a Tienda Libre</h1>
+    <div class="container mt-5">
+        <h1>Bienvenido a Tienda Libre</h1>
 
-    <p class="lead">
-        Esta es la página principal de nuestra tienda.
-    </p>
+        <p class="lead">
+            Esta es la página principal de nuestra tienda.
+        </p>
 
-    <a href="/acerca-de-mi/" class="btn btn-primary">
-        Acerca de mí
-    </a>
-</div>
+        <a href="/acerca-de-mi/" class="btn btn-primary">
+            Acerca de mí
+        </a>
+    </div>
 
+    <h1 class='mb-4'>{{titulo}}</h1>
+    {%if usuario_logeado %}
+        <div class='alert alert-info'>Hola de nuevo! Estas son las ofertas.</div>
+        <div class='row'>
+        {% for producto in productos %}
+            <div class='col-md-4 mb-3'>
+                <div class='card h-100'>
+                    <div class='card-body'>
+                        <h5 class='card-title'>{{producto.nombre}}</h5>
+                        {% if producto.precio %}
+
+                            <p class="fw-bold">
+                                Precio:
+                                ${{ producto.precio|floatformat:2 }}
+                            </p>
+
+                            {% else %}
+
+                            <p class="fw-bold">
+                                Precio:
+                                {{ producto.precio|default:"Sin precio" }}
+                            </p>
+
+                            {% endif %}
+                        {% if producto.stock > 0 %}
+                            <span class='badge bg-success'>{{producto.stock}} en stock</span>
+                        {% else %}
+                            <span class='badge bg-danger'>Agotado</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {%empty%}
+            <p class='text-muted'>No hay productos disponibles en este momento.</p>
+        {% endfor %}
+        </div>
+    {% endif %}
 {% endblock %}
