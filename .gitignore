@@ -6,3 +6,7 @@ media/
 .env
 media/
 staticfiles/
+# Base de datos
+db.sqlite3
+db_backup_clase9.sqlite3
+*.sqlite3
