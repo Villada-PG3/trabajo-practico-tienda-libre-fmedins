@@ -1,8 +1,8 @@
 from django.db.models import Q
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import TemplateView, ListView, DetailView
 from .models import Producto
-from .forms import ContactoForm
+from .forms import ContactoForm, ProductoForm
 
 
 class HomeView(TemplateView):
@@ -74,4 +74,19 @@ def contacto(request):
     return render(request, "tiendalibre/contacto.html", {
         "form": form,
         "enviado": enviado
+    })
+
+def producto_nuevo(request):
+    if request.method == "POST":
+        form = ProductoForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect("catalogo")
+
+    else:
+        form = ProductoForm()
+
+    return render(request, "tiendalibre/producto_form.html", {
+        "form": form
     })

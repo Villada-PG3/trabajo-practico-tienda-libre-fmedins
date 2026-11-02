@@ -1,0 +1,73 @@
+
+{% extends 'tiendalibre/base.html' %}
+
+{% block title %}Agregar producto - Tienda Libre{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h1 class="text-center mb-4">Agregar producto</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        {% for campo in form %}
+                        <div class="mb-3">
+
+                            {% if campo.field.widget.input_type == "checkbox" %}
+                                <div class="form-check">
+                                    {{ campo }}
+                                    <label class="form-check-label"
+                                           for="{{ campo.id_for_label }}">
+                                        {{ campo.label }}
+                                    </label>
+                                </div>
+                            {% else %}
+                                <label class="form-label"
+                                       for="{{ campo.id_for_label }}">
+                                    {{ campo.label }}
+                                </label>
+
+                                <div>
+                                    {{ campo }}
+                                </div>
+                            {% endif %}
+
+                            {% for error in campo.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ error }}
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endfor %}
+
+                        <button type="submit"
+                                class="btn btn-primary w-100">
+                            Guardar producto
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+
+            <div class="text-center mt-3">
+                <a href="{% url 'catalogo' %}">
+                    Volver al catálogo
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
