@@ -8,6 +8,24 @@
 
     <h1 class="text-center mb-5">Catálogo</h1>
 
+    <form method="GET" action="{% url 'catalogo' %}" class="mb-4">
+        <div class="input-group">
+
+            <input
+                type="text"
+                name="q"
+                class="form-control"
+                placeholder="Buscar productos..."
+                value="{{ request.GET.q }}"
+            >
+
+            <button type="submit" class="btn btn-primary">
+                Buscar
+            </button>
+
+        </div>
+    </form>
+
     <div class="row">
 
         {% for producto in productos %}
