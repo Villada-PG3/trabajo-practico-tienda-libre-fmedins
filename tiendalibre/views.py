@@ -1,6 +1,6 @@
 
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 from .models import Producto
 
 
@@ -25,11 +25,11 @@ class CatalogoView(ListView):
     model = Producto
     template_name = "tiendalibre/catalogo.html"
     context_object_name = "productos"
+    ordering = ["pk"]
+    paginate_by = 6
 
 
-def detalle_producto(request, pk):
-    producto = get_object_or_404(Producto, pk=pk)
-
-    return render(request, "tiendalibre/detalle.html", {
-        "producto": producto
-    })
+class ProductoDetailView(DetailView):
+    model = Producto
+    template_name = "tiendalibre/detalle.html"
+    context_object_name = "producto"
