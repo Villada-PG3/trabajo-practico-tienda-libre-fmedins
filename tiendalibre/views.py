@@ -2,6 +2,7 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, ListView, DetailView
 from .models import Producto
+from .forms import ContactoForm
 
 
 class HomeView(TemplateView):
@@ -56,3 +57,21 @@ class ProductoDetailView(DetailView):
     model = Producto
     template_name = "tiendalibre/detalle.html"
     context_object_name = "producto"
+
+def contacto(request):
+    enviado = False
+
+    if request.method == "POST":
+        form = ContactoForm(request.POST)
+
+        if form.is_valid():
+            enviado = True
+            form = ContactoForm()
+
+    else:
+        form = ContactoForm()
+
+    return render(request, "tiendalibre/contacto.html", {
+        "form": form,
+        "enviado": enviado
+    })

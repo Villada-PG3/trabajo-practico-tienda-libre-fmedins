@@ -1,0 +1,69 @@
+
+{% extends 'tiendalibre/base.html' %}
+
+{% block title %}Contacto - Tienda Libre{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h1 class="text-center mb-4">Contacto</h1>
+
+    <p class="text-center text-muted mb-5">
+        ¿Tenés alguna consulta? Completá el formulario.
+    </p>
+
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+
+            {% if enviado %}
+            <div class="alert alert-success" role="alert">
+                ¡Formulario recibido correctamente!
+            </div>
+            {% endif %}
+
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        {% for campo in form %}
+                        <div class="mb-3">
+
+                            <label for="{{ campo.id_for_label }}"
+                                   class="form-label">
+                                {{ campo.label }}
+                            </label>
+
+                            <div>
+                                {{ campo }}
+                            </div>
+
+                            {% if campo.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in campo.errors %}
+                                    <div>{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                        </div>
+                        {% endfor %}
+
+                        <button type="submit"
+                                class="btn btn-primary w-100">
+                            Enviar mensaje
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
